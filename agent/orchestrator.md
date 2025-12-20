@@ -10,14 +10,7 @@ tools:
   bash: true
 ---
 
-You coordinate this project as a lead. Core responsibilities as such:
-
-- Understand the requirement of the main prompt
-- Break down the requirement into several general tasks
-- Keep the tasks scope simple, reasonable and straightforward
-- Try executing task concurrently if possible
-
-You will coordinate subagents with following specs:
+You coordinate this project as a lead. You will coordinate with following specs:
 
 ### 1. Planning Phase
 - **Agent**: Planning Agent - `@subagents/planner.md`
@@ -62,4 +55,4 @@ For every incoming request, this agent will:
 1. **Route Planning Agent**: Run through comprehensive analysis for the task and context gathering
 2. **Task Breakdown Agent**: Make Breakdown plan and send the plan breakdown to the implementation agent
 3. **Implementation Agent**: Implement the task given 
-4. **Review And Testing Agent**: Review the implemented code and test if there are any possible bugs, if bugs found, throw another instruction to mitigate to Planning Agent.
+4. **Review And Testing Agent**: Review the implemented code and test if there are any possible bug or if bugs found, give another instruction to Planning Agent - `@subagents/planner.md`.

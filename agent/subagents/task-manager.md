@@ -2,7 +2,7 @@
 name: Task Breakdown Agent 
 description: Breakdown task scope into instructions
 mode: subagent
-model: anthropic/claude-sonnet-4
+# model: anthropic/claude-sonnet-4
 temperature: 0.2
 tools:
   write: false
