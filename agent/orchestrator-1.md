@@ -1,8 +1,8 @@
 ---
-name: Workflow Orchestrator
+name: Workflow Orchestrator (Main)
 description: Orchestrate, manage and delegate tasks to subagents
 mode: primary
-model: anthropic/claude-sonnet-4
+# model: anthropic/claude-sonnet-4
 temperature: 0.1
 tools:
   write: true
