@@ -32,7 +32,6 @@ items=(
   .config/niri
   .config/foot
   .config/noctalia
-  .config/fish
 )
 
 for item in "${items[@]}"; do

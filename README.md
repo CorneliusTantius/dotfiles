@@ -1,29 +1,52 @@
 # dotfiles
 
-Arch / CachyOS laptop dotfiles.
+Personal Arch / CachyOS dotfiles for a MacBookPro16,1 running **niri + Noctalia + foot**.
 
 ## Included
-- zsh + powerlevel10k
-- niri config
-- foot config
-- Noctalia config
-- fish config
-- helper scripts for power tuning + mac-style keybind workflow
+- **zsh** + powerlevel10k prompt
+- **niri** compositor config
+- **foot** terminal config
+- **Noctalia** shell/config
+- helper scripts for:
+  - AMD GPU low-power mode
+  - CPU low/medium-low power profiles
+  - power draw checks
+  - mac-style keybind workflow on CachyOS
 
 ## Layout
-- `~/.zshrc`
-- `~/.p10k.zsh`
-- `~/.gitconfig`
-- `~/.config/niri`
-- `~/.config/foot`
-- `~/.config/noctalia`
-- `~/.config/fish`
-- `~/workspace/cachyos-niri-mac-keybind`
+```text
+.
+├── .zshrc
+├── .p10k.zsh
+├── .gitconfig
+├── .config/
+│   ├── foot/
+│   ├── niri/
+│   └── noctalia/
+├── cachyos-niri-mac-keybind/
+└── install.sh
+```
+
+## Quick install
+Clone repo, then run:
+
+```bash
+./install.sh
+```
+
+What it does:
+- symlinks tracked files into `$HOME`
+- backs up existing files before replacing them
+- keeps setup easy to update with `git pull`
+
+## Manual apply
+If you prefer manual setup, copy or symlink the files you want into `$HOME`.
 
 ## Notes
-- Personal setup for MacBookPro16,1 on CachyOS + niri.
-- Some paths are user-specific and may need edits after cloning.
-- Review scripts before running on another machine.
+- tuned for **CachyOS** on **MacBookPro16,1**
+- some paths are user-specific and may need edits after cloning
+- review helper scripts before running on another machine
+- Noctalia config is included so setup restores more cleanly out of box
 
-## Apply manually
-Clone repo, then copy files into `$HOME`.
+## Related scripts
+See `cachyos-niri-mac-keybind/` for power + keybind helpers.
