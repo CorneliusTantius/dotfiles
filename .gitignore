@@ -1,0 +1,19 @@
+# Secrets / machine-local
+*.log
+.DS_Store
+.cache/
+.local/
+.history
+.zcompdump*
+.zsh_history
+.config/gh/
+.config/git/
+.config/keyd/
+.config/mozilla/
+.config/chromium/
+.config/google-chrome/
+.config/Code/User/globalStorage/
+.config/Code/User/workspaceStorage/
+
+# Noctalia runtime noise
+.config/noctalia/**/.cache/
