@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SERVICE_PATH="/etc/systemd/system/cpu-low-power.service"
-SCRIPT_PATH="/home/nelly/workspace/cachyos-niri-mac-keybind/set-cpu-medium-low.sh"
+SCRIPT_PATH="/home/nelly/workspace/cachyos-mac-a2141-scripts/set-cpu-medium-low.sh"
 
 if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
   exec sudo "$0" "$@"

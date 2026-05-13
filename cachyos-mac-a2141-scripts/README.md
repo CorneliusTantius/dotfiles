@@ -1,4 +1,4 @@
-# cachyos-niri-mac-keybind
+# cachyos-mac-a2141-scripts
 
 Small helper scripts for CachyOS + niri to add Mac-style `Super` shortcuts.
 

@@ -23,7 +23,7 @@ Personal Arch / CachyOS dotfiles for a MacBookPro16,1 running **niri + Noctalia 
 │   ├── foot/
 │   ├── niri/
 │   └── noctalia/
-├── cachyos-niri-mac-keybind/
+├── cachyos-mac-a2141-scripts/
 └── install.sh
 ```
 
@@ -49,4 +49,4 @@ If you prefer manual setup, copy or symlink the files you want into `$HOME`.
 - Noctalia config is included so setup restores more cleanly out of box
 
 ## Related scripts
-See `cachyos-niri-mac-keybind/` for power + keybind helpers.
+See `cachyos-mac-a2141-scripts/` for power + keybind helpers.
