@@ -1,0 +1,16 @@
+// ────────────── Lenovo L32p-30 profile ──────────────
+// Active when Lenovo is connected as DP-3.
+// External 4K panel on left, internal display on right.
+
+output "DP-3" {
+    mode "3840x2160@59.997"
+    scale 1
+    position x=0 y=0
+    variable-refresh-rate on-demand=true
+}
+
+output "eDP-1" {
+    mode "3072x1920@60.000"
+    scale 1.3
+    position x=3840 y=0
+}

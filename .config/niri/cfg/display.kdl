@@ -1,24 +1,9 @@
 // ────────────── Output Configuration ──────────────
 // Run `niri msg outputs` to get correct names.
 // Docs: https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+//
+// Manual profiles live in ./displays/.
+// Switch by changing this include, then run: niri msg action load-config
 
-// External 4K Lenovo — left side, primary when plugged
-output "DP-3" {
-    mode "3840x2160@59.997"
-    scale 1.25
-    position x=0 y=0
-    variable-refresh-rate on-demand=true
-}
-
-// Internal MacBook display — right side
-output "eDP-1" {
-    mode "3072x1920@60.000"
-    scale 1.3
-    position x=3072 y=0
-}
-
-// Stale entry kept for legacy DP-1 hookup
-output "DP-1" {
-    mode "2560x1440@359.979"
-    scale 1
-}
+include "./displays/lenovo-l32p-30.kdl"
+// include "./displays/skydata-h27g30q.kdl"
