@@ -5,11 +5,11 @@ echo '==> openrgb setup'
 command -v pacman >/dev/null 2>&1 || exit 0
 
 echo '==> install openrgb'
-sudo pacman -S --needed openrgb
+pacman -S --needed --noconfirm openrgb
 
 echo '==> write rgb-off runner'
-sudo install -d /usr/local/bin
-cat <<'EOF' | sudo tee /usr/local/bin/openrgb_force_off.sh >/dev/null
+install -d /usr/local/bin
+cat <<'EOF' > /usr/local/bin/openrgb_force_off.sh
 #!/usr/bin/env sh
 set -eu
 
@@ -49,6 +49,6 @@ done
 echo '==> rgb off failed'
 exit 1
 EOF
-sudo chmod 755 /usr/local/bin/openrgb_force_off.sh
+chmod 755 /usr/local/bin/openrgb_force_off.sh
 
 echo '==> openrgb runner ready: /usr/local/bin/openrgb_force_off.sh'

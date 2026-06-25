@@ -14,7 +14,9 @@ sudo keyd reload || sudo systemctl restart keyd
 
 echo '==> install openrgb off boot hook'
 sudo install -Dm755 "$DOTFILES_DIR/scripts/openrgb_off.sh" /usr/local/bin/openrgb_off.sh
-sudo install -Dm644 "$DOTFILES_DIR/systemd/system/openrgb-off.service" /etc/systemd/system/openrgb-off.service
+sudo /usr/local/bin/openrgb_off.sh
+sudo mkdir -p /etc/systemd/system
+sudo cp "$DOTFILES_DIR/systemd/system/openrgb-off.service" /etc/systemd/system/openrgb-off.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now openrgb-off.service
 
