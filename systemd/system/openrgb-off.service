@@ -5,7 +5,7 @@ Wants=systemd-udev-settle.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/openrgb_off.sh
+ExecStart=/usr/local/bin/openrgb_force_off.sh
 RemainAfterExit=yes
 
 [Install]
