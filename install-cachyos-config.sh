@@ -12,6 +12,12 @@ sudo install -Dm644 "$DOTFILES_DIR/etc/keyd/default.conf" /etc/keyd/default.conf
 sudo systemctl enable --now keyd
 sudo keyd reload || sudo systemctl restart keyd
 
+echo '==> install openrgb off boot hook'
+sudo install -Dm755 "$DOTFILES_DIR/scripts/openrgb_off.sh" /usr/local/bin/openrgb_off.sh
+sudo install -Dm644 "$DOTFILES_DIR/systemd/system/openrgb-off.service" /etc/systemd/system/openrgb-off.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now openrgb-off.service
+
 echo '==> install shell config'
 cp "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 cp "$DOTFILES_DIR/.p10k.zsh" "$HOME/.p10k.zsh"
