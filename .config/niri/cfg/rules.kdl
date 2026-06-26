@@ -1,5 +1,5 @@
     window-rule {
-        geometry-corner-radius 14 // ponytail: lower rounded corners a bit, bump if you miss the softer look
+        geometry-corner-radius 8 // ponytail: keep corners subtle, bump if you want softer windows
         clip-to-geometry true
     }
 
