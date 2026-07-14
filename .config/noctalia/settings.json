@@ -152,7 +152,7 @@
         {
           "compactMode": false,
           "hideMode": "hidden",
-          "hideWhenIdle": false,
+          "hideWhenIdle": true,
           "id": "MediaMini",
           "maxWidth": 145,
           "panelShowAlbumArt": false,
