@@ -5,7 +5,9 @@
         background-color "transparent" // <- needed for noctalia-shell to set wallpaper
 
         focus-ring {
-            width 0.02
+            width 1
+            active-color "#bd93f9"
+            inactive-color "#44475a"
         }
 
         preset-column-widths {
