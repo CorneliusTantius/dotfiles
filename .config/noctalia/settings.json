@@ -102,7 +102,7 @@
           "colorizeSystemText": "none",
           "customIconPath": "",
           "enableColorization": false,
-          "icon": "rocket",
+          "icon": "triangle",
           "iconColor": "none",
           "id": "Launcher",
           "useDistroLogo": false
