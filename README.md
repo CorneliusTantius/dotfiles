@@ -5,7 +5,7 @@ Current CachyOS desktop dotfiles.
 ## Included
 - zsh + powerlevel10k
 - niri
-- noctalia
+- noctalia + quickshell shell override
 - alacritty
 - gtk/qt theme defaults
 - keyd

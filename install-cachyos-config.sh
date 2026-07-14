@@ -4,7 +4,7 @@ set -eu
 DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 echo '==> install packages'
-sudo pacman -S --needed zsh yay github-cli nvm alacritty keyd niri noctalia-shell
+sudo pacman -S --needed zsh yay github-cli nvm alacritty keyd niri noctalia-shell patch
 yay -S --needed helium-browser-bin
 
 echo '==> install keyd config'
@@ -32,43 +32,20 @@ cp "$DOTFILES_DIR/.config/gtk-4.0/settings.ini" "$HOME/.config/gtk-4.0/settings.
 cp "$DOTFILES_DIR/.config/qt5ct/qt5ct.conf" "$HOME/.config/qt5ct/qt5ct.conf"
 cp "$DOTFILES_DIR/.config/qt6ct/qt6ct.conf" "$HOME/.config/qt6ct/qt6ct.conf"
 
-echo '==> replace niri and noctalia config'
-rm -rf "$HOME/.config/niri" "$HOME/.config/noctalia"
+echo '==> replace niri, noctalia, and quickshell config'
+rm -rf "$HOME/.config/niri" "$HOME/.config/noctalia" "$HOME/.config/quickshell/noctalia-shell"
 [ -d /etc/skel/.config/niri ] && cp -r /etc/skel/.config/niri "$HOME/.config/"
 [ -d /etc/skel/.config/noctalia ] && cp -r /etc/skel/.config/noctalia "$HOME/.config/"
 cp -r "$DOTFILES_DIR/.config/niri" "$HOME/.config/"
 cp -r "$DOTFILES_DIR/.config/noctalia" "$HOME/.config/"
+mkdir -p "$HOME/.config/quickshell"
+cp -r /etc/xdg/quickshell/noctalia-shell "$HOME/.config/quickshell/"
+patch -d "$HOME/.config/quickshell/noctalia-shell" -p1 < "$DOTFILES_DIR/patches/noctalia-shell-floating-pills.patch"
 
 echo '==> install wallpaper'
 mkdir -p "$HOME/.config/noctalia/wallpapers"
 cp "$DOTFILES_DIR/wallpaper.jpg" "$HOME/.config/noctalia/wallpapers/wallpaper.jpg"
 sed -i "s|__HOME__|$HOME|g" "$HOME/.config/noctalia/settings.json"
-python - <<'PY'
-import json
-from pathlib import Path
-
-p = Path.home() / '.config/noctalia/settings.json'
-data = json.loads(p.read_text())
-bar = data['bar']
-bar['backgroundOpacity'] = 0.78
-bar['frameThickness'] = 4
-bar['marginVertical'] = 8
-bar['widgetSpacing'] = 10
-data['ui']['panelBackgroundOpacity'] = 0.78
-
-for w in bar['widgets']['left']:
-    if w.get('id') == 'Launcher':
-        w['useDistroLogo'] = False
-        w['icon'] = 'rocket'
-
-for w in bar['widgets']['right']:
-    if w.get('id') == 'Battery':
-        # ponytail: enforce simple battery text+charging icon even if upstream defaults drift
-        w['displayMode'] = 'icon-always'
-        w['hideIfIdle'] = False
-
-p.write_text(json.dumps(data, indent=2) + '\n')
-PY
 rm -f "$HOME/.cache/noctalia-shell/wallpapers.json"
 
 echo '==> app dark mode defaults'

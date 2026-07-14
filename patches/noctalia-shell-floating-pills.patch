@@ -1,0 +1,227 @@
+--- a/Modules/Bar/Bar.qml
++++ b/Modules/Bar/Bar.qml
+@@ -672,86 +672,143 @@
+ 
+       // Calculate margin to center widgets horizontally within the bar height
+       readonly property real horizontalBarMargin: Math.round((root.barHeight - root.capsuleHeight) / 2)
++      readonly property real sectionPadding: Math.max(Style.marginS, Settings.data.bar.contentPadding + Style.marginS)
++      readonly property color sectionBg: Color.mSurfaceVariant
++      readonly property color sectionBorder: Qt.alpha(Color.mOutline, 0.22)
+ 
+       // Left Section
+-      RowLayout {
+-        id: leftSection
+-        objectName: "leftSection"
++      Item {
++        id: leftSectionPill
++        visible: root.leftWidgetsModel.count > 0
+         anchors.left: parent.left
+         anchors.leftMargin: horizontalBarMargin + Settings.data.bar.contentPadding
+-        y: Style.pixelAlignCenter(parent.height, height)
+-        spacing: Settings.data.bar.widgetSpacing
+-
+-        Repeater {
+-          model: root.leftWidgetsModel
+-          delegate: BarWidgetLoader {
+-            required property var model
+-            required property int index
+-
+-            widgetId: model.id || ""
+-            widgetScreen: root.screen
+-            widgetProps: ({
+-                            "widgetId": model.id,
+-                            "section": "left",
+-                            "sectionWidgetIndex": index,
+-                            "sectionWidgetsCount": root.leftWidgetsModel.count
+-                          })
+-            Layout.alignment: Qt.AlignVCenter
++        width: visible ? leftSection.implicitWidth + sectionPadding * 2 : 0
++        height: parent.height
++
++        Rectangle {
++          anchors.verticalCenter: parent.verticalCenter
++          width: parent.width
++          height: root.capsuleHeight
++          radius: height / 2
++          color: sectionBg
++          border.color: sectionBorder
++          border.width: 1
++        }
++
++        RowLayout {
++          id: leftSection
++          objectName: "leftSection"
++          x: sectionPadding
++          y: Style.pixelAlignCenter(parent.height, height)
++          spacing: Settings.data.bar.widgetSpacing
++
++          Repeater {
++            model: root.leftWidgetsModel
++            delegate: BarWidgetLoader {
++              required property var model
++              required property int index
++
++              widgetId: model.id || ""
++              widgetScreen: root.screen
++              widgetProps: ({
++                              "widgetId": model.id,
++                              "section": "left",
++                              "sectionWidgetIndex": index,
++                              "sectionWidgetsCount": root.leftWidgetsModel.count
++                            })
++              Layout.alignment: Qt.AlignVCenter
++            }
+           }
+         }
+       }
+ 
+       // Center Section
+-      RowLayout {
+-        id: centerSection
+-        objectName: "centerSection"
++      Item {
++        id: centerSectionPill
++        visible: root.centerWidgetsModel.count > 0
+         anchors.horizontalCenter: parent.horizontalCenter
+-        y: Style.pixelAlignCenter(parent.height, height)
+-        spacing: Settings.data.bar.widgetSpacing
+-
+-        Repeater {
+-          model: root.centerWidgetsModel
+-          delegate: BarWidgetLoader {
+-            required property var model
+-            required property int index
+-
+-            widgetId: model.id || ""
+-            widgetScreen: root.screen
+-            widgetProps: ({
+-                            "widgetId": model.id,
+-                            "section": "center",
+-                            "sectionWidgetIndex": index,
+-                            "sectionWidgetsCount": root.centerWidgetsModel.count
+-                          })
+-            Layout.alignment: Qt.AlignVCenter
++        width: visible ? centerSection.implicitWidth + sectionPadding * 2 : 0
++        height: parent.height
++
++        Rectangle {
++          anchors.verticalCenter: parent.verticalCenter
++          width: parent.width
++          height: root.capsuleHeight
++          radius: height / 2
++          color: sectionBg
++          border.color: sectionBorder
++          border.width: 1
++        }
++
++        RowLayout {
++          id: centerSection
++          objectName: "centerSection"
++          x: sectionPadding
++          y: Style.pixelAlignCenter(parent.height, height)
++          spacing: Settings.data.bar.widgetSpacing
++
++          Repeater {
++            model: root.centerWidgetsModel
++            delegate: BarWidgetLoader {
++              required property var model
++              required property int index
++
++              widgetId: model.id || ""
++              widgetScreen: root.screen
++              widgetProps: ({
++                              "widgetId": model.id,
++                              "section": "center",
++                              "sectionWidgetIndex": index,
++                              "sectionWidgetsCount": root.centerWidgetsModel.count
++                            })
++              Layout.alignment: Qt.AlignVCenter
++            }
+           }
+         }
+       }
+ 
+       // Right Section
+-      RowLayout {
+-        id: rightSection
+-        objectName: "rightSection"
++      Item {
++        id: rightSectionPill
++        visible: root.rightWidgetsModel.count > 0
+         anchors.right: parent.right
+         anchors.rightMargin: horizontalBarMargin + Settings.data.bar.contentPadding
+-        y: Style.pixelAlignCenter(parent.height, height)
+-        spacing: Settings.data.bar.widgetSpacing
+-
+-        Repeater {
+-          model: root.rightWidgetsModel
+-          delegate: BarWidgetLoader {
+-            required property var model
+-            required property int index
+-
+-            widgetId: model.id || ""
+-            widgetScreen: root.screen
+-            widgetProps: ({
+-                            "widgetId": model.id,
+-                            "section": "right",
+-                            "sectionWidgetIndex": index,
+-                            "sectionWidgetsCount": root.rightWidgetsModel.count
+-                          })
+-            Layout.alignment: Qt.AlignVCenter
++        width: visible ? rightSection.implicitWidth + sectionPadding * 2 : 0
++        height: parent.height
++
++        Rectangle {
++          anchors.verticalCenter: parent.verticalCenter
++          width: parent.width
++          height: root.capsuleHeight
++          radius: height / 2
++          color: sectionBg
++          border.color: sectionBorder
++          border.width: 1
++        }
++
++        RowLayout {
++          id: rightSection
++          objectName: "rightSection"
++          x: sectionPadding
++          y: Style.pixelAlignCenter(parent.height, height)
++          spacing: Settings.data.bar.widgetSpacing
++
++          Repeater {
++            model: root.rightWidgetsModel
++            delegate: BarWidgetLoader {
++              required property var model
++              required property int index
++
++              widgetId: model.id || ""
++              widgetScreen: root.screen
++              widgetProps: ({
++                              "widgetId": model.id,
++                              "section": "right",
++                              "sectionWidgetIndex": index,
++                              "sectionWidgetsCount": root.rightWidgetsModel.count
++                            })
++              Layout.alignment: Qt.AlignVCenter
++            }
+           }
+         }
+       }
+--- a/Modules/MainScreen/MainScreen.qml
++++ b/Modules/MainScreen/MainScreen.qml
+@@ -207,10 +207,11 @@
+     id: blurRegion
+     // ── Non-framed bar (simple/floating): single rectangle with bar corner states ──
+     Region {
+-      x: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.x : 0
+-      y: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.y : 0
+-      width: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.width : 0
+-      height: (!barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden) ? barPlaceholder.height : 0
++      readonly property bool showBarBlur: !barPlaceholder.isFramed && root.barShouldShow && !barPlaceholder.isHidden && Settings.data.bar.backgroundOpacity > 0
++      x: showBarBlur ? barPlaceholder.x : 0
++      y: showBarBlur ? barPlaceholder.y : 0
++      width: showBarBlur ? barPlaceholder.width : 0
++      height: showBarBlur ? barPlaceholder.height : 0
+       radius: Style.radiusL
+       topLeftCorner: barPlaceholder.topLeftCornerState
+       topRightCorner: barPlaceholder.topRightCornerState
