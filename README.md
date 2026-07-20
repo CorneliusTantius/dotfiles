@@ -9,7 +9,6 @@ Current CachyOS desktop dotfiles.
 - alacritty
 - gtk/qt theme defaults
 - keyd
-- openrgb boot hook to force RGB off
 
 ## Install
 ```bash

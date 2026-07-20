@@ -5,22 +5,14 @@ DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 echo '==> install packages'
 sudo pacman -S --needed zsh yay github-cli nvm alacritty keyd niri noctalia-shell patch
-yay -S --needed helium-browser-bin
+
 
 echo '==> install keyd config'
 sudo install -Dm644 "$DOTFILES_DIR/etc/keyd/default.conf" /etc/keyd/default.conf
 sudo systemctl enable --now keyd
 sudo keyd reload || sudo systemctl restart keyd
 
-echo '==> install openrgb off boot hook'
-sudo install -Dm755 "$DOTFILES_DIR/scripts/openrgb_off.sh" /usr/local/bin/openrgb_off.sh
-sudo /usr/local/bin/openrgb_off.sh
-sudo mkdir -p /etc/systemd/system
-sudo cp "$DOTFILES_DIR/systemd/system/openrgb-off.service" /etc/systemd/system/openrgb-off.service
-sudo systemctl daemon-reload
-sudo systemctl enable --now openrgb-off.service
 
-echo '==> install shell config'
 cp "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 cp "$DOTFILES_DIR/.p10k.zsh" "$HOME/.p10k.zsh"
 
@@ -53,29 +45,7 @@ if command -v gsettings >/dev/null 2>&1; then
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' || true
 fi
-python - <<'PY'
-import json
-from pathlib import Path
 
-slack = Path.home() / '.config/Slack/storage/root-state.json'
-if slack.exists():
-    data = json.loads(slack.read_text())
-    settings = data.setdefault('settings', {})
-    settings['userTheme'] = 'dark'
-    settings['systemThemeSyncEnabled'] = True
-    user_choices = settings.setdefault('userChoices', {})
-    user_choices['userTheme'] = 'dark'
-    user_choices['systemThemeSyncEnabled'] = True
-    slack.write_text(json.dumps(data, separators=(',', ':')))
-
-helium = Path.home() / '.config/net.imput.helium/Default/Preferences'
-if helium.exists():
-    data = json.loads(helium.read_text())
-    browser = data.setdefault('browser', {})
-    theme = browser.setdefault('theme', {})
-    theme['color_scheme2'] = 2
-    helium.write_text(json.dumps(data, separators=(',', ':')))
-PY
 
 echo '==> reload shell'
 if command -v qs >/dev/null 2>&1; then
