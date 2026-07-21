@@ -1,0 +1,178 @@
+# Bar — floating top bar with auto-hide
+#
+# Widget types available:
+#   launcher, clock, spacer, workspaces, taskbar, active_window, media,
+#   audio_visualizer, sysmon, tray, notifications, battery, volume, brightness,
+#   control-center, bluetooth, network, session, wallpaper, settings,
+#   theme_mode, caffeine, power_profile, privacy, keyboard_layout, nightlight,
+#   lock_keys, custom_button, screenshot, clipboard, weather
+#
+# Customize each widget under [widget.<name>]; type defaults to <name>.
+
+[bar]
+order = ["main"]
+
+# ── Bar: main ──────────────────────────────────────
+[bar.main]
+position            = "top"
+enabled             = true
+auto_hide           = true
+smart_auto_hide     = false
+show_on_workspace_switch = true
+reserve_space       = false        # no exclusive zone — overlapping
+layer               = "top"
+
+# Sizing
+thickness           = 38
+margin_ends         = 8
+margin_edge         = 8            # >0 = floating
+margin_opposite_edge = 0
+padding             = 12
+widget_spacing      = 8
+
+# Styling
+background_opacity  = 0.85
+border              = "outline"
+border_width        = 1.0
+shadow              = true
+contact_shadow      = false
+panel_overlap       = 1
+radius              = 10
+concave_edge_corners = false
+hover_highlight     = true
+scale               = 1.0
+font_weight         = 500
+font_family         = ""
+
+# Capsule (off by default — just clean glyphs)
+capsule           = false
+capsule_fill      = "surface_variant"
+capsule_thickness = 0.76
+capsule_radius    = 8.0
+capsule_opacity   = 1.0
+
+# ── Widget layout ──────────────────────────────────
+start  = [
+    "launcher",
+    "spacer-sm",
+    "workspaces",
+]
+center = [
+    "clock",
+]
+end    = [
+    "spacer-fill",
+    "cpu-graph",
+    "ram-text",
+    "spacer-sm",
+    "media",
+    "spacer-sm",
+    "systray",
+    "notifications",
+    "spacer-sm",
+    "volume",
+    "battery",
+    "brightness",
+    "control-center",
+]
+
+# ── Widget definitions ─────────────────────────────
+
+# Launcher — Noctalia logo glyph
+[widget.launcher]
+type  = "launcher"
+glyph = "apps"
+
+# Workspaces — animated pills, index labels
+[widget.workspaces]
+type                      = "workspaces"
+style                     = "regular"
+display                   = "id"
+max_label_chars           = 2
+pill_scale                = 0.65
+active_pill_size          = 2.2
+inactive_pill_size        = 1.0
+focused_color             = "primary"
+occupied_color            = "secondary"
+empty_color               = "surface_variant"
+focused_output_only       = false
+labels_only_when_occupied = true
+hide_when_empty           = false
+enable_scroll             = true
+
+# Clock — time + date on hover
+[widget.clock]
+type             = "clock"
+format           = "{:%H:%M}"
+vertical_format  = "{:%H\n%M}"
+tooltip_format   = "{:%A, %B %d — %H:%M}"
+
+# CPU usage — compact sparkline, no label
+[widget.cpu-graph]
+type       = "sysmon"
+stat       = "cpu_usage"
+display    = "graph"
+show_label = false
+
+# RAM used — text-only
+[widget.ram-text]
+type       = "sysmon"
+stat       = "ram_used"
+display    = "text"
+show_label = true
+
+# Media — album art + scrolling title, hide when idle
+[widget.media]
+type               = "media"
+artist_first       = true
+art_size           = 18
+max_length         = 140
+title_scroll       = "on_hover"
+hide_when_no_media = true
+enable_scroll      = true
+
+# System tray — drawer with pinned items
+[widget.systray]
+type        = "tray"
+drawer      = false       # flat icons inline (set true for collapsible drawer)
+# pinned    = ["nm-applet"]
+# hidden    = []
+
+# Notifications — bell icon, hide when no unread
+[widget.notifications]
+type               = "notifications"
+hide_when_no_unread = true
+
+# Volume — output, scrollable, no label (icon only)
+[widget.volume]
+type           = "volume"
+device         = "output"
+enable_scroll  = true
+scroll_step    = 5
+show_label     = false
+
+# Battery — graphic + label
+[widget.battery]
+type         = "battery"
+display_mode = "graphic"
+show_label   = true
+
+# Brightness — icon only, scroll to adjust
+[widget.brightness]
+type           = "brightness"
+enable_scroll  = true
+scroll_step    = 5
+show_label     = false
+
+# Control Center — Noctalia hexagon
+[widget.control-center]
+type = "control-center"
+
+# ── Spacers ─────────────────────────────────────────
+[widget.spacer-sm]
+type   = "spacer"
+length = 6
+
+[widget.spacer-fill]
+type   = "spacer"
+length = 0   # v5 may not support "fill" — placeholder. Use actual pixel width.

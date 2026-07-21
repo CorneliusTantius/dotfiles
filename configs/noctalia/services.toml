@@ -1,0 +1,96 @@
+# Services — audio, brightness, idle, location, night light, notifications, sysmon
+# v4: audio.*, brightness.*, idle.*, location.*, nightLight.*, notifications.*, systemMonitor.*
+
+# ── Audio ──────────────────────────────────────────
+[audio]
+enable_overdrive    = false
+enable_sounds       = false
+sound_volume        = 0.5
+volume_change_sound = ""
+notification_sound  = ""
+
+# ── Brightness ─────────────────────────────────────
+[brightness]
+device_mappings = []
+enforce_minimum = true
+enable_ddc      = false
+
+# ── Idle ───────────────────────────────────────────
+[idle]
+pre_action_fade_seconds = 2.0
+
+[idle.behavior.lock]
+timeout = 660
+action  = "lock"
+enabled = false
+
+[idle.behavior.screen-off]
+timeout = 600
+action  = "screen_off"
+enabled = false
+
+[idle.behavior.suspend]
+timeout = 1800
+action  = "lock_and_suspend"
+enabled = false
+
+# ── Location ───────────────────────────────────────
+[location]
+auto_locate              = false
+address                  = ""
+weather_enabled          = true
+show_weather_city_name   = true
+show_weather_timezone    = true
+show_calendar_events     = true
+show_calendar_weather    = true
+show_week_number         = false
+analog_clock_in_calendar = false
+first_day_of_week        = -1
+use_12h                  = false
+use_fahrenheit           = false
+weather_show_effects     = true
+
+# ── Night Light ────────────────────────────────────
+[night_light]
+enabled           = false
+auto_schedule     = true
+day_temperature   = 6500
+night_temperature = 4000
+
+# ── Notifications ──────────────────────────────────
+[notification]
+enable_daemon       = true
+show_app_name       = true
+show_actions        = true
+position            = "top_right"
+layer               = "top"
+scale               = 1.0
+background_opacity  = 0.97
+border              = true
+offset_x            = 20
+offset_y            = 8
+monitors            = []
+collapse_on_dismiss = true
+
+# ── System Monitor ────────────────────────────
+[system.monitor]
+enabled               = true
+cpu_poll_seconds      = 2.0
+gpu_poll_seconds      = 0.0        # disabled — avoid waking dGPU
+memory_poll_seconds   = 2.0
+network_poll_seconds  = 3.0
+disk_poll_seconds     = 10.0
+cpu_temp_sensor_path  = ""
+
+# Thresholds for sysmon widget highlight_color
+[system.monitor.thresholds]
+cpu_critical       = 90
+cpu_warning        = 80
+memory_critical    = 90
+memory_warning     = 80
+disk_critical      = 90
+disk_warning       = 80
+disk_avail_critical = 10
+disk_avail_warning  = 20
+battery_critical   = 5
+battery_warning    = 20

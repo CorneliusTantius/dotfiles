@@ -1,0 +1,173 @@
+# Shell — global UI, panels, launcher, lock screen, session
+# v4: general.*, appLauncher.*, osd.*, sessionMenu.*
+
+[shell]
+corner_radius_scale              = 1.2           # slightly rounder than default
+button_borders                   = true
+input_borders                    = true
+popup_borders                    = true
+popup_shadows                    = true
+font_family                      = "Adwaita Sans"
+time_format                      = "{:%H:%M}"
+date_format                      = "%A, %x"
+lang                             = ""
+offline_mode                     = false
+external_ip_enabled              = false
+telemetry_enabled                = false
+setup_wizard_enabled             = true
+polkit_agent                     = true
+password_style                   = "default"      # "default" | "random"
+avatar_path                      = "/home/cornel/.face"
+show_location                    = true
+clipboard_enabled                = true
+clipboard_history_max_entries    = 100
+clipboard_confirm_clear_history  = true
+clipboard_auto_paste             = "off"          # off | auto | ctrl_v | ctrl_shift_v | shift_insert
+clipboard_image_action_command   = ""
+launch_apps_as_systemd_services  = false
+launch_apps_custom_command       = ""
+app_icon_colorize                = false
+app_icon_color                   = "on_surface"
+settings_show_advanced           = false
+middle_click_opens_widget_settings = true
+screen_time_enabled              = false
+
+# ── Animation ──────────────────────────────────────
+[shell.animation]
+enabled = true
+speed   = 1.2                                    # slightly snappier than default
+
+# ── Shadows ────────────────────────────────────────
+[shell.shadow]
+direction = "down"
+alpha     = 0.45
+
+# ── Panel placement ────────────────────────────────
+[shell.panel]
+transparency_mode             = "solid"           # solid | soft | glass
+borders                       = true
+shadow                        = true
+list_item_background          = false
+launcher_placement            = "centered"
+clipboard_placement           = "centered"
+control_center_placement      = "attached"
+wallpaper_placement           = "attached"
+session_placement             = "attached"
+polkit_placement              = "floating"
+polkit_position               = "center"
+floating_offset               = 8
+open_near_click_control_center = false
+open_near_click_launcher       = false
+open_near_click_clipboard      = false
+open_near_click_wallpaper      = false
+open_near_click_session        = false
+
+# ── Launcher ───────────────────────────────────────
+[shell.launcher]
+categories              = true
+show_icons              = true
+compact                 = false
+app_grid                = false
+sort_by_usage           = true
+fetch_exchange_rates    = true
+provider_prefix         = "/"
+
+[shell.launcher.providers.calculator]
+prefix = ""
+global = true
+
+[shell.launcher.providers.emoji]
+prefix = "emo"
+
+[shell.launcher.providers.session]
+prefix  = "session"
+global  = false
+
+[shell.launcher.providers.wallpaper]
+prefix = "wall"
+
+[shell.launcher.providers.windows]
+prefix = "win"
+
+# ── Lock screen ────────────────────────────────────
+[shell.lockscreen]
+compact              = false
+countdown_ms         = 10000
+enable_countdown     = true
+show_media_controls  = false
+show_session_buttons = true
+show_hibernate       = false
+blur                 = 0
+tint                 = 0
+monitors             = []
+lock_on_suspend      = true
+animations           = false
+
+# ── Session (power) panel ──────────────────────────
+[shell.session]
+grid         = false
+grid_columns = 3
+
+# Power command overrides (empty = use built-in logind/systemd)
+[shell.session.power]
+suspend  = ""
+reboot   = ""
+shutdown = ""
+
+# Session actions — order, visibility, and behavior
+[[shell.session.actions]]
+action  = "lock"
+enabled = true
+
+[[shell.session.actions]]
+action  = "suspend"
+enabled = true
+
+[[shell.session.actions]]
+action  = "hibernate"
+enabled = true
+
+[[shell.session.actions]]
+action  = "reboot"
+enabled = true
+
+[[shell.session.actions]]
+action  = "logout"
+enabled = true
+
+[[shell.session.actions]]
+action  = "shutdown"
+enabled = true
+
+# ── Screenshot ─────────────────────────────────────
+[shell.screenshot]
+save_to_file      = true
+directory         = ""
+filename_pattern  = "screenshot_%Y%m%d_%H%M%S"
+copy_to_clipboard = false
+
+# ── Screen corners (disabled) ──────────────────────
+[shell.screen_corners]
+enabled = false
+size    = 32
+
+# ── Hot corners (disabled) ─────────────────────────
+[hot_corners]
+enabled  = false
+delay_ms = 0
+
+[hot_corners.top_left]
+action = "none"
+
+[hot_corners.top_right]
+action = "none"
+
+[hot_corners.bottom_left]
+action = "none"
+
+[hot_corners.bottom_right]
+action = "none"
+
+# ── MPRIS ──────────────────────────────────────────
+[shell.mpris]
+blacklist = []

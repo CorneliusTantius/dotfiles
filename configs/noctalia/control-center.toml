@@ -1,0 +1,23 @@
+# Control Center — sidebar, tabs, shortcuts
+# v4: controlCenter.*
+
+[control_center]
+sidebar        = "compact"       # full | compact | none
+sidebar_section = "compact"
+# width        = 680
+# hidden_tabs  = []
+
+# Shortcut grid (v4: left/right rows)
+[control_center.shortcuts]
+top = [
+    "network",
+    "bluetooth",
+    "wallpaper",
+    "performance",
+]
+bottom = [
+    "notifications",
+    "power-profile",
+    "keep-awake",
+    "night-light",
+]

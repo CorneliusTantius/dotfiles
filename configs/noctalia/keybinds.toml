@@ -1,0 +1,22 @@
+# Keybinds for Noctalia internal navigation (shell surfaces, panels, dialogs)
+# v4 equivalent: general.keybinds
+#
+# NOTE: Compositor keybinds (launching launcher, control center, etc.) live in
+# your compositor config, not here. Use `noctalia msg <command>` in your
+# compositor. Examples:
+#
+#   noctalia msg panel-toggle launcher
+#   noctalia msg panel-toggle control-center
+#   noctalia msg settings-toggle
+#   noctalia msg volume-up
+#   noctalia msg screenshot-region
+
+[keybinds]
+validate    = ["return", "kp_enter"]
+cancel      = ["escape"]
+left        = ["left"]
+right       = ["right"]
+up          = ["up"]
+down        = ["down"]
+tab_next    = ["tab"]
+tab_previous = ["shift+tab", "iso_left_tab"]

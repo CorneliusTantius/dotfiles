@@ -1,0 +1,41 @@
+# Noctalia v5 — entry point
+# Files are loaded in order; later includes override earlier ones.
+# This file's own settings override all includes.
+
+[include]
+autoload = false
+files = [
+    "theme.toml",
+    "shell.toml",
+    "keybinds.toml",
+    "bar.toml",
+    "services.toml",
+    "control-center.toml",
+    "desktop.toml",
+    "dock.toml",
+]
+
+# ── Network ─────────────────────────────────────────
+[network]
+wifi_details_view_mode          = "grid"
+bluetooth_details_view_mode     = "grid"
+bluetooth_auto_connect          = true
+bluetooth_hide_unnamed_devices  = false
+bluetooth_rssi_poll_interval_ms = 60000
+bluetooth_rssi_polling_enabled  = false
+disable_discoverability         = false
+
+# ── Calendar ────────────────────────────────────────
+# Cards default to header + month (weather-card disabled, matching v4)
+
+# ── Hooks ───────────────────────────────────────────
+# Uncomment and fill in to enable:
+#
+# [hooks]
+# started             = ""
+# wallpaper_changed    = ""
+# colors_changed       = ""
+# theme_mode_changed   = ""
+# session_locked       = ""
+# session_unlocked     = ""
+# battery_percentage_changed = ""

@@ -1,0 +1,24 @@
+# Desktop — widgets, wallpaper, performance mode
+# v4: desktopWidgets.*, wallpaper.*, noctaliaPerformance.*
+
+# ── Desktop widgets ────────────────────────────────
+[desktop_widgets]
+enabled          = false
+overview_enabled = true
+
+# ── Wallpaper ──────────────────────────────────────
+[wallpaper]
+enabled             = true
+fill_mode           = "crop"         # center | crop | fit | stretch | repeat | span
+fill_color          = "#111111"
+transition          = ["fade", "wipe", "disc", "stripes", "zoom", "honeycomb"]
+transition_duration = 1500
+edge_smoothness     = 0.3
+transition_on_startup = false
+# directory         = "/home/cornel/Wallpapers"
+
+# ── Performance mode ───────────────────────────────
+# (v4: noctaliaPerformance.* — these control the low-power toggle in Control Center)
+[performance]
+disable_desktop_widgets = true
+disable_wallpaper       = true
