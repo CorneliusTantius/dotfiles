@@ -18,9 +18,9 @@ if ! command -v keyd >/dev/null 2>&1; then
     sudo pacman -S --needed keyd
 fi
 
-echo "→ Symlinking config: $DEST → $SRC"
+echo "→ Copying config: $SRC → $DEST"
 sudo mkdir -p /etc/keyd
-sudo ln -sf "$SRC" "$DEST"
+sudo cp "$SRC" "$DEST"
 
 echo "→ Enabling and starting keyd..."
 sudo systemctl enable --now keyd
