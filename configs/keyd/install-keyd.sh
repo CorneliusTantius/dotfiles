@@ -14,16 +14,12 @@ SRC="$HOME/Workspace/dotfiles/configs/keyd/default.conf"
 DEST="/etc/keyd/default.conf"
 
 if ! command -v keyd >/dev/null 2>&1; then
-    echo "→ Installing keyd..."
     sudo pacman -S --needed keyd
 fi
 
-echo "→ Copying config: $SRC → $DEST"
 sudo mkdir -p /etc/keyd
 sudo cp "$SRC" "$DEST"
 
-echo "→ Enabling and starting keyd..."
 sudo systemctl enable --now keyd
 
-echo "✓ keyd installed and running"
 keyd --version 2>/dev/null || true

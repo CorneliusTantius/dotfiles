@@ -1,7 +1,1 @@
-#!/bin/bash
-
-rm -f ~/.bashrc
-rm -f ~/.zshrc
-
-cp .bashrc ~/
-cp .zshrc ~/
+#!/usr/bin/env sh
