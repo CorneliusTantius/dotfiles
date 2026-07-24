@@ -5,7 +5,7 @@ curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/instal
 pi install npm:@narumitw/pi-retry
 pi install npm:pi-rtk-optimizer
 pi install git:github.com/CorneliusTantius/pi-theme
-
+pi install git:https://github.com/CorneliusTantius/pi-sys-prompt.git
 
 if [ ! -d .pi/agents ]; then
   mkdir -p .pi/agents
