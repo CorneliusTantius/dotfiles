@@ -1,23 +1,24 @@
-# Control Center — sidebar, tabs, shortcuts
-# v4: controlCenter.*
+# Control Center — sidebar, shortcuts
 
 [control_center]
-sidebar        = "compact"       # full | compact | none
+sidebar         = "compact"       # full | compact | none
 sidebar_section = "compact"
-# width        = 680
-# hidden_tabs  = []
 
-# Shortcut grid (v4: left/right rows)
-[control_center.shortcuts]
-top = [
-    "network",
-    "bluetooth",
-    "wallpaper",
-    "performance",
-]
-bottom = [
-    "notifications",
-    "power-profile",
-    "keep-awake",
-    "night-light",
-]
+# Shortcut buttons on Home tab (max 6 shown, order preserved)
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "wallpaper"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "nightlight"

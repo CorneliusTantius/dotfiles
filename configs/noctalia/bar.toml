@@ -98,7 +98,10 @@ empty_color               = "surface_variant"
 focused_output_only       = false
 labels_only_when_occupied = true
 hide_when_empty           = false
-enable_scroll             = true
+
+[widget.workspaces.actions]
+scroll_up   = "workspace-next"
+scroll_down = "workspace-prev"
 
 # Clock — time + date on hover
 [widget.clock]
@@ -129,7 +132,6 @@ art_size           = 18
 max_length         = 140
 title_scroll       = "on_hover"
 hide_when_no_media = true
-enable_scroll      = true
 
 # System tray — drawer with pinned items
 [widget.systray]
@@ -147,9 +149,11 @@ hide_when_no_unread = true
 [widget.volume]
 type           = "volume"
 device         = "output"
-enable_scroll  = true
-scroll_step    = 5
 show_label     = false
+
+[widget.volume.actions]
+scroll_up   = "volume-up"
+scroll_down = "volume-down"
 
 # Battery — graphic + label
 [widget.battery]
@@ -160,9 +164,11 @@ show_label   = true
 # Brightness — icon only, scroll to adjust
 [widget.brightness]
 type           = "brightness"
-enable_scroll  = true
-scroll_step    = 5
 show_label     = false
+
+[widget.brightness.actions]
+scroll_up   = "brightness-up"
+scroll_down = "brightness-down"
 
 # Control Center — Noctalia hexagon
 [widget.control-center]
