@@ -6,7 +6,7 @@ enabled = false
 
 # ── Wallpaper ──────────────────────────────────────
 [wallpaper]
-enabled               = true
+enabled               = false
 fill_mode             = "crop"         # center | crop | fit | stretch | repeat | span
 fill_color            = "#111111"
 transition            = ["fade", "wipe", "disc", "stripes", "zoom", "honeycomb"]

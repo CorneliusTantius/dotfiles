@@ -30,7 +30,8 @@ install_if_missing \
     bluez-utils
 
 install_if_missing \
-    sddm
+    greetd \
+    greetd-tuigreet
 
 install_if_missing \
     intel-media-driver \
@@ -41,3 +42,4 @@ install_if_missing \
     network-manager-applet
 
 sudo systemctl enable --now bluetooth
+sudo systemctl enable greetd.service

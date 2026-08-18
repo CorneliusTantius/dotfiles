@@ -20,11 +20,12 @@ install_if_missing \
     mangowm\
     noctalia\
     wl-clipboard\
-    alacritty\
-    xdg-desktop-portal-gnome\
+    foot\
+    xdg-desktop-portal-wlr\
+    xdg-desktop-portal-gtk\
     nautilus\
     ttf-jetbrains-mono-nerd\
-    xorg-xwayland\
-    sddm
+    xorg-xwayland
+#    sddm
 
-sudo systemctl enable sddm
+# sudo systemctl enable sddm
