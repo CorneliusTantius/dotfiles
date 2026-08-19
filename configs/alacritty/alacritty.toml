@@ -1,0 +1,209 @@
+# ──────────────────────────────────────────────
+# Alacritty · dark cyan/purple cyberpunk rice
+# JetBrains Mono Nerd Font · 11pt
+# ──────────────────────────────────────────────
+
+[env]
+TERM = "alacritty"
+
+# ── Window ────────────────────────────────────
+[window]
+padding           = { x = 28, y = 28 }
+dynamic_padding   = false
+decorations       = "Full"
+opacity           = 0.80
+startup_mode      = "Windowed"
+title             = "terminal"
+dynamic_title     = true
+class             = { instance = "Alacritty", general = "Alacritty" }
+resize_increments = false
+
+# ── Scrolling ─────────────────────────────────
+[scrolling]
+history    = 10000
+multiplier = 3
+
+# ── Font ──────────────────────────────────────
+[font]
+normal      = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold        = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
+italic      = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font Mono", style = "Bold Italic" }
+size        = 14.0
+offset      = { x = 0, y = 0 }
+glyph_offset = { x = 0, y = 0 }
+builtin_box_drawing = true
+
+# ── Colors: dark cyan-purple ──────────────────
+[colors.primary]
+background = "#0f111a"
+foreground = "#cdd6f4"
+
+[colors.normal]
+black   = "#1e1e2e"
+red     = "#f38ba8"
+green   = "#a6e3a1"
+yellow  = "#f9e2af"
+blue    = "#89b4fa"
+magenta = "#cba6f7"
+cyan    = "#94e2d5"
+white   = "#bac2de"
+
+[colors.bright]
+black   = "#45475a"
+red     = "#fab387"
+green   = "#a6e3a1"
+yellow  = "#f9e2af"
+blue    = "#89b4fa"
+magenta = "#f5c2e7"
+cyan    = "#94e2d5"
+white   = "#a6adc8"
+
+[colors.dim]
+black   = "#11111b"
+red     = "#691f29"
+green   = "#325630"
+yellow  = "#695d32"
+blue    = "#23416b"
+magenta = "#57395c"
+cyan    = "#265952"
+white   = "#46505f"
+
+[colors.selection]
+text       = "#0f111a"
+background = "#cba6f7"
+
+[colors.cursor]
+text   = "#0f111a"
+cursor = "#f5c2e7"
+
+[colors.search]
+matches       = { foreground = "#0f111a", background = "#a6e3a1" }
+focused_match = { foreground = "#0f111a", background = "#89b4fa" }
+
+[colors.footer_bar]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[colors.hints]
+start = { foreground = "#0f111a", background = "#f9e2af" }
+end   = { foreground = "#0f111a", background = "#f9e2af" }
+
+[colors.line_indicator]
+foreground = "#585b70"
+
+# ── Cursor ────────────────────────────────────
+[cursor]
+style            = { shape = "Block", blinking = "On" }
+vi_mode_style    = { shape = "Beam", blinking = "Off" }
+blink_interval   = 750
+blink_timeout    = 5
+unfocused_hollow = true
+thickness        = 0.15
+
+# ── Selection ─────────────────────────────────
+[selection]
+save_to_clipboard     = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+# ── Mouse ─────────────────────────────────────
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+mouse  = "Right"
+action = "ExpandSelection"
+
+[[mouse.bindings]]
+mouse  = "Middle"
+action = "PasteSelection"
+
+# ── Keyboard ──────────────────────────────────
+[keyboard]
+
+[[keyboard.bindings]]
+key    = "Left"
+mods   = "Alt"
+mode   = "~Vi"
+action = "WordLeft"
+
+[[keyboard.bindings]]
+key    = "Right"
+mods   = "Alt"
+mode   = "~Vi"
+action = "WordRight"
+
+[[keyboard.bindings]]
+key    = "Back"
+mods   = "Alt"
+mode   = "~Vi"
+action = "WordLeftEnd"
+
+[[keyboard.bindings]]
+key    = "Delete"
+mods   = "Alt"
+mode   = "~Vi"
+action = "WordRightEnd"
+
+[[keyboard.bindings]]
+key    = "C"
+mods   = "Control|Shift"
+action = "Copy"
+
+[[keyboard.bindings]]
+key    = "V"
+mods   = "Control|Shift"
+action = "Paste"
+
+[[keyboard.bindings]]
+key    = "Plus"
+mods   = "Control"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key    = "Minus"
+mods   = "Control"
+action = "DecreaseFontSize"
+
+[[keyboard.bindings]]
+key    = "Key0"
+mods   = "Control"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key    = "Space"
+mods   = "Control|Shift"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key    = "N"
+mods   = "Control|Shift"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key    = "F"
+mods   = "Control|Shift"
+action = "SearchForward"
+
+[[keyboard.bindings]]
+key    = "B"
+mods   = "Control|Shift"
+action = "SearchBackward"
+
+# ── Hints (URL opener) ────────────────────────
+[[hints.enabled]]
+regex   = "(mailto:|gemini:|gopher:|https:|http:|news:file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}|^``\\\\]*"
+command = { program = "xdg-open", args = [] }
+mouse   = { enabled = true, mods = "None" }
+binding = { key = "U", mods = "Control|Shift" }
+post_processing = true
+
+# ── Terminal ──────────────────────────────────
+[terminal]
+shell = { program = "/usr/bin/bash", args = [] }
+
+# ── Debug ─────────────────────────────────────
+[debug]
+render_timer       = false
+persistent_logging = false
+log_level          = "Info"

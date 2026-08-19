@@ -1,0 +1,69 @@
+// Zed settings — dark catppuccin mocha rice
+// Matches the alacritty terminal vibe
+{
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "left",
+    "file_icons": true,
+    "git_status": true,
+    "indent_size": 16
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "font_family": "JetBrainsMono Nerd Font Mono",
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font Mono",
+    "font_size": 16,
+    "blinking": "off"
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha (alacritty-ryce)"
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "coloring": "indent_aware"
+  },
+  "cursor_blink": true,
+  "cursor_shape": "bar",
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true
+  },
+  "autosave": "on_focus_change",
+  "base_keymap": "VSCode",
+  "relative_line_numbers": "disabled",
+  "scrollbar": {
+    "show": "system",
+    "cursors": true,
+    "git_diff": true
+  },
+  "editor": {
+    "line_height": "standard",
+    "show_wrap_guides": true,
+    "tab_size": 2,
+    "soft_wrap": "editor_width"
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true
+  },
+  "vim": {
+    "use_system_clipboard": "always"
+  }
+}
