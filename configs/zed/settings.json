@@ -25,8 +25,8 @@
     "blinking": "off"
   },
   "theme": {
-    "mode": "dark",
-    "light": "One Light",
+    "mode": "system",
+    "light": "Catppuccin Mocha (alacritty-ryce)",
     "dark": "Catppuccin Mocha (alacritty-ryce)"
   },
   "tabs": {
