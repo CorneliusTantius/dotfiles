@@ -11,6 +11,7 @@ alias gcm='git commit -m'
 alias gp='git push'
 alias gpa='git pull --all -p'
 alias lgit='lazygit'
+alias ff='fastfetch'
 
 # Added by jcode installer
 export PATH="/home/nelly/.local/bin:$PATH"
