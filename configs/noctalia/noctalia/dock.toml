@@ -1,0 +1,46 @@
+# Dock (disabled by default in v4, kept disabled for now)
+# v4 equivalents: dock.*
+
+[dock]
+enabled             = false              # v4: dock.enabled
+position            = "bottom"           # v4: position
+active_monitor_only = false              # v4: onlySameOutput
+monitors            = []                 # v4: monitors
+
+icon_size           = 48
+main_axis_padding   = 16
+cross_axis_padding  = 8
+item_spacing        = 6
+background_opacity  = 1.0                # v4: backgroundOpacity
+border              = "outline"
+border_width        = 0.0
+shadow              = true
+radius              = 16
+radius_top_left     = 16
+radius_top_right    = 16
+radius_bottom_left  = 16
+radius_bottom_right = 16
+concave_edge_corners = true
+margin_ends         = 0
+margin_edge         = 0
+
+show_running        = true
+auto_hide           = true               # v4: displayMode = "auto_hide"
+smart_auto_hide     = false
+reserve_space       = true
+
+active_scale        = 1.0
+inactive_scale      = 0.85               # v4: deadOpacity = 0.6 (different concept but similar intent)
+magnification       = true
+magnification_scale = 1.35
+active_opacity      = 1.0
+inactive_opacity    = 0.85
+show_instance_count = true
+show_dots           = false              # v4: inactiveIndicators
+
+launcher_position   = "end"              # v4: launcherPosition
+launcher_icon       = "grid-dots"        # v4: launcherIcon = "" → default Tabler grid
+launcher_custom_image           = ""
+launcher_custom_image_colorize  = false
+
+pinned = []                              # v4: pinnedApps

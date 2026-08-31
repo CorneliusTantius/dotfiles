@@ -6,3 +6,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 alias ..='cd ..'
 alias ls='ls --color=auto -lhXF'
+
+# Added by jcode installer
+export PATH="/home/nelly/.local/bin:$PATH"
