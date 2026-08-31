@@ -6,6 +6,11 @@ export PATH="$HOME/.local/bin:$PATH"
 
 alias ..='cd ..'
 alias ls='ls --color=auto -lhXF'
+alias ga='git add'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gpa='git pull --all -p'
+alias lgit='lazygit'
 
 # Added by jcode installer
 export PATH="/home/nelly/.local/bin:$PATH"
