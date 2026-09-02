@@ -87,7 +87,8 @@ glyph = "apps"
 [widget.workspaces]
 type                      = "workspaces"
 style                     = "regular"
-display                   = "id"
+show_labels               = true
+label_source              = "id"
 max_label_chars           = 2
 pill_scale                = 0.65
 active_pill_size          = 2.2
@@ -110,19 +111,19 @@ format           = "{:%H:%M}"
 vertical_format  = "{:%H\n%M}"
 tooltip_format   = "{:%A, %B %d — %H:%M}"
 
-# CPU usage — compact sparkline, no label
+# CPU usage — compact sparkline, no value text
 [widget.cpu-graph]
-type       = "sysmon"
-stat       = "cpu_usage"
-display    = "graph"
-show_label = false
+type          = "sysmon"
+stat          = "cpu_usage"
+visualization = "graph"
+show_value    = false
 
 # RAM used — text-only
 [widget.ram-text]
-type       = "sysmon"
-stat       = "ram_used"
-display    = "text"
-show_label = true
+type          = "sysmon"
+stat          = "ram_used"
+visualization = "none"
+show_value    = true
 
 # Media — album art + scrolling title, hide when idle
 [widget.media]
