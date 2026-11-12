@@ -1,0 +1,90 @@
+// monarch desktop: Waybar (Nothing-style: black pills, white text, red accent)
+// Copied to ~/.config/waybar/ by monarch-add-desktop (only if you have none).
+// Modules: https://github.com/Alexays/Waybar/wiki/Modules
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "margin-top": 10,
+  "margin-left": 14,
+  "margin-right": 14,
+  "spacing": 10,
+
+  "modules-left": ["custom/launcher", "mango/workspaces", "mango/layout"],
+  "modules-center": ["clock"],
+  "modules-right": ["bluetooth", "network", "wireplumber", "backlight", "battery"],
+
+  // The red dot: click to open the launcher (same as Ctrl+Space)
+  "custom/launcher": {
+    "format": "●",
+    "on-click": "fuzzel",
+    "tooltip": false
+  },
+
+  // Tags as dots: filled = current, hollow = has windows
+  "mango/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "○",
+      "active": "●",
+      "urgent": "●",
+      "empty": "·"
+    },
+    "hide-empty": true,
+    "on-click": "activate"
+  },
+
+  "mango/layout": {
+    "format": "{symbol}"
+  },
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %d %b}",
+    "tooltip": false
+  },
+
+  // Clicks open small terminal apps in a floating window (q or Esc closes them):
+  //   Bluetooth: bluetui   Wi-Fi: impala   Volume: wiremix (right-click = mute)
+  "bluetooth": {
+    "format": "BT",
+    "format-connected": "BT {num_connections}",
+    "format-off": "BT OFF",
+    "format-disabled": "",
+    "on-click": "monarch-popup bluetui",
+    "tooltip": false
+  },
+
+  "network": {
+    "format-wifi": "{essid}",
+    "format-ethernet": "WIRED",
+    "format-disconnected": "OFFLINE",
+    "on-click": "monarch-popup impala",
+    "tooltip": false
+  },
+
+  "wireplumber": {
+    "format": "VOL {volume}",
+    "format-muted": "MUTE",
+    "scroll-step": 2,
+    "on-click": "monarch-popup wiremix --tab output --mouse",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "tooltip": false
+  },
+
+  "backlight": {
+    "format": "{percent}",
+    "tooltip": false
+  },
+
+  "battery": {
+    "format": "{capacity}%",
+    "format-charging": "+{capacity}%",
+    "format-full": "{capacity}%",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "tooltip": false
+  }
+}
