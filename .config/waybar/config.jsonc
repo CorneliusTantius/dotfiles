@@ -17,6 +17,7 @@
   // Pill shown only when an external display is connected
   "custom/external": {
     "exec": "sh ~/.config/waybar/external-monitor.sh",
+    "on-click": "sh ~/.config/mango/monitor-layout.sh",
     "interval": 5,
     "hide-empty-text": true,
     "tooltip": false
