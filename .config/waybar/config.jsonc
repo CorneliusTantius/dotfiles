@@ -12,7 +12,7 @@
 
   "modules-left": ["custom/launcher", "mango/workspaces", "mango/layout"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/external", "bluetooth", "network", "wireplumber", "backlight", "battery"],
+  "modules-right": ["custom/external", "network", "bluetooth", "wireplumber", "backlight", "battery"],
 
   // Pill shown only when an external display is connected
   "custom/external": {
