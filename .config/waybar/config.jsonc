@@ -12,7 +12,7 @@
 
   "modules-left": ["custom/launcher", "mango/workspaces", "mango/layout"],
   "modules-center": ["clock"],
-  "modules-right": ["bluetooth", "network", "wireplumber", "backlight", "custom/battery-limit", "battery"],
+  "modules-right": ["bluetooth", "network", "wireplumber", "backlight", "battery"],
 
   // The red dot: click to open the launcher (same as Ctrl+Space)
   "custom/launcher": {
@@ -74,13 +74,6 @@
 
   "backlight": {
     "format": "{percent}",
-    "tooltip": false
-  },
-
-  // Shows "limit 80%" when battery charge limit is on (hidden at 100%)
-  "custom/battery-limit": {
-    "exec": "awk '$1<100{print \"limit \"$1\"%\"}' /sys/class/power_supply/BAT0/charge_control_end_threshold 2>/dev/null",
-    "interval": 30,
     "tooltip": false
   },
 

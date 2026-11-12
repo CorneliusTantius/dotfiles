@@ -24,7 +24,6 @@ window#waybar {
 #network,
 #wireplumber,
 #backlight,
-#custom-battery-limit,
 #battery {
   background: #000000;
   color: #ffffff;
@@ -82,8 +81,7 @@ window#waybar {
 
 #bluetooth,
 #wireplumber,
-#backlight,
-#custom-battery-limit {
+#backlight {
   color: #8c8c8c;
 }
 
