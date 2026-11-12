@@ -80,6 +80,7 @@
   "battery": {
     "format": "{capacity}%",
     "format-charging": "+{capacity}%",
+    "format-plugged": "~{capacity}%",
     "format-full": "{capacity}%",
     "states": {
       "warning": 20,
