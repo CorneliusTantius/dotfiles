@@ -81,7 +81,7 @@
   },
 
   "backlight": {
-    "format": "{percent}",
+    "format": "☼ {percent}",
     "tooltip": false
   },
 
