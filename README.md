@@ -23,3 +23,13 @@ The script copies `.bashrc` and everything in `.config/` into your home director
 ## Backup
 
 Before overwriting anything, the script backs up existing files to `~/.dotfiles-backup`. Only the latest backup is kept: each run replaces the previous one. Running the script again therefore backs up the dotfiles that were installed last time, so keep your own copies of anything you want to preserve.
+
+## Restore
+
+To put back the files from the last backup:
+
+```sh
+sh restore.sh
+```
+
+This copies `~/.dotfiles-backup` over your home directory. Files that had no backup are left as they are.
