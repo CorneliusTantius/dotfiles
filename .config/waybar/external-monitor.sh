@@ -1,5 +1,5 @@
 #!/bin/sh
-# Print "ext" if an external display is connected.
+# Print a monitor marker if an external display is connected.
 # The built-in panel (eDP) is ignored. Prints nothing otherwise.
 
 for c in /sys/class/drm/card*-*; do
@@ -10,7 +10,7 @@ for c in /sys/class/drm/card*-*; do
         eDP*) continue ;;
     esac
     if [ "$(cat "$c/status")" = connected ]; then
-        echo ext
+        echo "□"
         exit 0
     fi
 done
