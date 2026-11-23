@@ -5,6 +5,9 @@
 # $HOME/.dotfiles-backup. Only the latest backup is kept: each run
 # replaces the previous backup.
 #
+# It also installs the apps the configs use that are missing, on Arch
+# (incl. CachyOS), Debian/Ubuntu and Fedora. Set NO_DEPS=1 to skip that.
+#
 # Run from a checkout:   sh install.sh
 # Run from the web:      curl -fsSL https://raw.githubusercontent.com/CorneliusTantius/dotfiles/main/install.sh | sh
 
@@ -67,6 +70,67 @@ install_item() {
         cp -a "$src" "$dst"
     fi
 }
+
+# --- Dependencies -----------------------------------------------------------
+# Entries are "command=package". The pseudo-command "font" checks for
+# JetBrains Mono via fc-list.
+DEPS_ARCH="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber bluetui=bluetui impala=impala wiremix=wiremix font=ttf-jetbrains-mono"
+DEPS_DEBIAN="waybar=waybar mako=mako-notifier udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=fonts-jetbrains-mono"
+DEPS_FEDORA="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=jetbrains-mono-fonts"
+
+have() {
+    if [ "$1" = font ]; then
+        command -v fc-list >/dev/null 2>&1 && fc-list | grep -qi "JetBrains Mono"
+    else
+        command -v "$1" >/dev/null 2>&1
+    fi
+}
+
+install_deps() {
+    [ "${NO_DEPS:-0}" = 1 ] && return 0
+
+    # Detect by package manager: works for any derivative (CachyOS, Monarch,
+    # Mint...) and does not depend on /etc/os-release or the kernel name.
+    family=""
+    if command -v pacman >/dev/null 2>&1; then family=arch
+    elif command -v apt-get >/dev/null 2>&1; then family=debian
+    elif command -v dnf >/dev/null 2>&1; then family=fedora
+    fi
+
+    case $family in
+        arch)   deps=$DEPS_ARCH ;;
+        debian) deps=$DEPS_DEBIAN ;;
+        fedora) deps=$DEPS_FEDORA ;;
+        *) echo "No pacman/apt-get/dnf found: skipping dependency install."; return 0 ;;
+    esac
+
+    missing=""
+    for entry in $deps; do
+        have "${entry%%=*}" || missing="$missing ${entry#*=}"
+    done
+    # mango is not in the main repos of any of these distros.
+    have mango || have mmsg || echo "Note: install the mango compositor yourself (AUR: mangowc on Arch)."
+    have monarch-popup || echo "Note: monarch-popup (used by waybar) is not packaged; install it yourself."
+
+    if [ -z "$missing" ]; then
+        echo "All dependencies already installed."
+        return 0
+    fi
+    echo "Installing missing packages:$missing"
+
+    if [ "$(id -u)" -eq 0 ]; then SUDO=""; else SUDO="sudo"; fi
+    # One package at a time so an unavailable name does not abort the rest.
+    case $family in
+        arch)   [ -n "$SUDO" ] && $SUDO -v || true; cmd="$SUDO pacman -S --needed --noconfirm" ;;
+        debian) $SUDO apt-get update || true; cmd="$SUDO apt-get install -y" ;;
+        fedora) cmd="$SUDO dnf install -y" ;;
+    esac
+    for pkg in $missing; do
+        $cmd "$pkg" || echo "Warning: could not install $pkg."
+    done
+}
+
+install_deps
 
 # Replace the previous backup with a fresh one.
 rm -rf "$BACKUP_DIR"

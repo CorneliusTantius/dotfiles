@@ -18,7 +18,9 @@ cd dotfiles
 sh install.sh
 ```
 
-The script copies `.bashrc` and everything in `.config/` into your home directory. Files are copied, not symlinked.
+The script first installs missing apps the configs use (waybar, mako, fuzzel, foot, grim, slurp, wl-clipboard, brightnessctl, wireplumber, udiskie, JetBrains Mono, plus bluetui/impala/wiremix on Arch). It picks pacman (Arch, CachyOS and derivatives), apt (Debian/Ubuntu) or dnf (Fedora) by whichever is installed. Set `NO_DEPS=1` to skip this. The mango compositor and `monarch-popup` are not packaged: install them yourself.
+
+Then it copies `.bashrc` and everything in `.config/` into your home directory. Files are copied, not symlinked.
 
 ## Backup
 
