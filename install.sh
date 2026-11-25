@@ -18,6 +18,12 @@
 
 set -eu
 
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Do not run as root or with sudo: the dotfiles would go to $HOME instead of your user's home." >&2
+    echo "Run as your normal user; the script calls sudo itself when needed." >&2
+    exit 1
+fi
+
 REPO_URL="https://github.com/CorneliusTantius/dotfiles.git"
 BACKUP_DIR="$HOME/.dotfiles-backup"
 TMP=""

@@ -41,3 +41,13 @@ sh restore.sh
 ```
 
 This copies `~/.dotfiles-backup` over your home directory. Files that had no backup are left as they are.
+
+## Cleanup after running with sudo
+
+Do not run `install.sh` with `sudo`: it refuses to run as root. If you did that earlier, undo it with:
+
+```sh
+sudo sh cleanup-root.sh
+```
+
+This restores or removes the files the run put in `/root`, deletes `/root/.dotfiles-backup`, and removes root from the `video` group.
