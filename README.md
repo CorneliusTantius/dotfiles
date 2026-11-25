@@ -26,7 +26,7 @@ The same script is the installer on a blank Arch/CachyOS tty and the updater on 
 4. copies `.bashrc`, `.bash_profile` and everything in `.config/` into your home directory (copied, not symlinked);
 5. reloads mango, mako and waybar if a session is running.
 
-Logging in on tty1 starts mango (see `.bash_profile`); tty2-6 stay text. Set `NO_DEPS=1` to skip steps 1-3.
+Logging in on any tty starts mango (see `.bash_profile`). Set `NO_DEPS=1` to skip steps 1-3.
 
 ## Backup
 

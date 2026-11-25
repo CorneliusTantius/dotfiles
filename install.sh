@@ -7,8 +7,8 @@
 #
 # It also sets up the desktop: installs the apps the configs use that are
 # missing (Arch/CachyOS, Debian/Ubuntu, Fedora), enables the bluetooth and
-# iwd services, adds you to the video group, and starts mango on tty1 at
-# login (via ~/.bash_profile). Every step is idempotent, so running it again
+# iwd services, adds you to the video group, and starts mango on tty login
+# (via ~/.bash_profile). Every step is idempotent, so running it again
 # on an existing install just updates the dotfiles and fills in what is
 # missing. Set NO_DEPS=1 to skip the system setup (packages, services,
 # groups).
@@ -194,7 +194,7 @@ echo "Dotfiles installed from $SRC."
 if ! command -v mango >/dev/null 2>&1; then
     echo "mango is not installed: the desktop will not start on login."
 else
-    echo "Log in on tty1 to start the desktop."
+    echo "Log in on a tty to start the desktop."
 fi
 if [ "$backed_up" -eq 1 ]; then
     echo "Previous files backed up to $BACKUP_DIR."
