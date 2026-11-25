@@ -1,5 +1,4 @@
-// monarch desktop: Waybar (Nothing-style: black pills, white text, red accent)
-// Copied to ~/.config/waybar/ by monarch-add-desktop (only if you have none).
+// Waybar (Nothing-style: black pills, white text, red accent)
 // Modules: https://github.com/Alexays/Waybar/wiki/Modules
 {
   "layer": "top",
@@ -60,7 +59,7 @@
     "format-connected": "BT {num_connections}",
     "format-off": "BT OFF",
     "format-disabled": "",
-    "on-click": "monarch-popup bluetui",
+    "on-click": "foot --app-id=popup bluetui",
     "tooltip": false
   },
 
@@ -68,7 +67,7 @@
     "format-wifi": "{essid}",
     "format-ethernet": "WIRED",
     "format-disconnected": "OFFLINE",
-    "on-click": "monarch-popup impala",
+    "on-click": "foot --app-id=popup impala",
     "tooltip": false
   },
 
@@ -76,7 +75,7 @@
     "format": "VOL {volume}",
     "format-muted": "MUTE",
     "scroll-step": 2,
-    "on-click": "monarch-popup wiremix --tab output --mouse",
+    "on-click": "foot --app-id=popup wiremix --tab output --mouse",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "tooltip": false
   },

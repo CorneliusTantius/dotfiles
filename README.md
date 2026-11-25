@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal dotfiles: `.bashrc` and configs under `.config/`.
+Personal dotfiles: `.bashrc`, `.bash_profile` and configs under `.config/`.
 
 ## Install
 
@@ -18,9 +18,15 @@ cd dotfiles
 sh install.sh
 ```
 
-The script first installs missing apps the configs use (waybar, mako, fuzzel, foot, grim, slurp, wl-clipboard, brightnessctl, wireplumber, udiskie, JetBrains Mono, plus bluetui/impala/wiremix on Arch). It picks pacman (Arch, CachyOS and derivatives), apt (Debian/Ubuntu) or dnf (Fedora) by whichever is installed. Set `NO_DEPS=1` to skip this. The mango compositor and `monarch-popup` are not packaged: install them yourself.
+The same script is the installer on a blank Arch/CachyOS tty and the updater on machines that already have it. It is safe to re-run. It:
 
-Then it copies `.bashrc` and everything in `.config/` into your home directory. Files are copied, not symlinked.
+1. installs git if missing (when run through `curl`);
+2. installs missing packages: mango (`mangowm`), waybar, mako, fuzzel, foot, udiskie, grim, slurp, wl-clipboard, brightnessctl, pipewire, bluez, iwd, polkit, JetBrains Mono, plus bluetui/impala/wiremix on Arch. It uses pacman, apt or dnf, whichever exists (mango is only packaged for Arch);
+3. enables `bluetooth` and `iwd` (unless NetworkManager is enabled) and adds you to the `video` group;
+4. copies `.bashrc`, `.bash_profile` and everything in `.config/` into your home directory (copied, not symlinked);
+5. reloads mango, mako and waybar if a session is running.
+
+Logging in on tty1 starts mango (see `.bash_profile`); tty2-6 stay text. Set `NO_DEPS=1` to skip steps 1-3.
 
 ## Backup
 

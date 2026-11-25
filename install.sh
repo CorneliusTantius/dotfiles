@@ -5,8 +5,13 @@
 # $HOME/.dotfiles-backup. Only the latest backup is kept: each run
 # replaces the previous backup.
 #
-# It also installs the apps the configs use that are missing, on Arch
-# (incl. CachyOS), Debian/Ubuntu and Fedora. Set NO_DEPS=1 to skip that.
+# It also sets up the desktop: installs the apps the configs use that are
+# missing (Arch/CachyOS, Debian/Ubuntu, Fedora), enables the bluetooth and
+# iwd services, adds you to the video group, and starts mango on tty1 at
+# login (via ~/.bash_profile). Every step is idempotent, so running it again
+# on an existing install just updates the dotfiles and fills in what is
+# missing. Set NO_DEPS=1 to skip the system setup (packages, services,
+# groups).
 #
 # Run from a checkout:   sh install.sh
 # Run from the web:      curl -fsSL https://raw.githubusercontent.com/CorneliusTantius/dotfiles/main/install.sh | sh
@@ -35,6 +40,14 @@ if [ -f "$0" ]; then
 fi
 if [ -z "$SRC" ]; then
     echo "Downloading dotfiles..."
+    if ! command -v git >/dev/null 2>&1; then
+        # Blank installs have no git. Needs root or sudo.
+        [ "$(id -u)" -eq 0 ] && S="" || S="sudo"
+        if command -v pacman >/dev/null 2>&1; then $S pacman -S --needed --noconfirm git
+        elif command -v apt-get >/dev/null 2>&1; then $S apt-get update && $S apt-get install -y git
+        elif command -v dnf >/dev/null 2>&1; then $S dnf install -y git
+        fi
+    fi
     TMP=$(mktemp -d)
     git clone --depth 1 -q "$REPO_URL" "$TMP/dotfiles"
     SRC="$TMP/dotfiles"
@@ -43,6 +56,7 @@ fi
 # Call $1 with the path (relative to $HOME) of every item to install.
 for_each_item() {
     "$1" ".bashrc"
+    "$1" ".bash_profile"
     for entry in "$SRC"/.config/*; do
         "$1" ".config/$(basename "$entry")"
     done
@@ -74,7 +88,7 @@ install_item() {
 # --- Dependencies -----------------------------------------------------------
 # Entries are "command=package". The pseudo-command "font" checks for
 # JetBrains Mono via fc-list.
-DEPS_ARCH="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber bluetui=bluetui impala=impala wiremix=wiremix font=ttf-jetbrains-mono"
+DEPS_ARCH="mango=mangowm pipewire=pipewire pipewire-pulse=pipewire-pulse bluetoothctl=bluez iwctl=iwd pkexec=polkit waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber bluetui=bluetui impala=impala wiremix=wiremix font=ttf-jetbrains-mono"
 DEPS_DEBIAN="waybar=waybar mako=mako-notifier udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=fonts-jetbrains-mono"
 DEPS_FEDORA="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=jetbrains-mono-fonts"
 
@@ -89,7 +103,7 @@ have() {
 install_deps() {
     [ "${NO_DEPS:-0}" = 1 ] && return 0
 
-    # Detect by package manager: works for any derivative (CachyOS, Monarch,
+    # Detect by package manager: works for any derivative (CachyOS,
     # Mint...) and does not depend on /etc/os-release or the kernel name.
     family=""
     if command -v pacman >/dev/null 2>&1; then family=arch
@@ -108,26 +122,56 @@ install_deps() {
     for entry in $deps; do
         have "${entry%%=*}" || missing="$missing ${entry#*=}"
     done
-    # mango is not in the main repos of any of these distros.
-    have mango || have mmsg || echo "Note: install the mango compositor yourself (AUR: mangowc on Arch)."
-    have monarch-popup || echo "Note: monarch-popup (used by waybar) is not packaged; install it yourself."
+    [ "$family" = arch ] || have mango || echo "Note: mango is only packaged for Arch; install it yourself."
+
+    if [ "$(id -u)" -eq 0 ]; then SUDO=""; else SUDO="sudo"; fi
+    if [ -n "$SUDO" ] && ! command -v sudo >/dev/null 2>&1; then
+        echo "sudo not found: skipping system setup. Re-run as root."
+        return 0
+    fi
 
     if [ -z "$missing" ]; then
         echo "All dependencies already installed."
-        return 0
+    else
+        echo "Installing missing packages:$missing"
+        # No -Sy on Arch: a partial upgrade breaks systems. If a package is
+        # not found, run "sudo pacman -Syu" and re-run this script.
+        # One package at a time so an unavailable name does not abort the rest.
+        case $family in
+            arch)   cmd="$SUDO pacman -S --needed --noconfirm" ;;
+            debian) $SUDO apt-get update || true; cmd="$SUDO apt-get install -y" ;;
+            fedora) cmd="$SUDO dnf install -y" ;;
+        esac
+        for pkg in $missing; do
+            $cmd "$pkg" || echo "Warning: could not install $pkg."
+        done
     fi
-    echo "Installing missing packages:$missing"
 
-    if [ "$(id -u)" -eq 0 ]; then SUDO=""; else SUDO="sudo"; fi
-    # One package at a time so an unavailable name does not abort the rest.
-    case $family in
-        arch)   [ -n "$SUDO" ] && $SUDO -v || true; cmd="$SUDO pacman -S --needed --noconfirm" ;;
-        debian) $SUDO apt-get update || true; cmd="$SUDO apt-get install -y" ;;
-        fedora) cmd="$SUDO dnf install -y" ;;
-    esac
-    for pkg in $missing; do
-        $cmd "$pkg" || echo "Warning: could not install $pkg."
-    done
+    setup_system
+}
+
+# Enable services and group membership. Safe to re-run.
+setup_system() {
+    command -v systemctl >/dev/null 2>&1 || return 0
+
+    # iwd (used by impala) conflicts with NetworkManager: leave those alone.
+    if systemctl is-enabled NetworkManager >/dev/null 2>&1; then
+        echo "NetworkManager is enabled: not enabling iwd."
+    elif command -v iwctl >/dev/null 2>&1; then
+        if [ ! -e /etc/iwd/main.conf ]; then
+            $SUDO mkdir -p /etc/iwd
+            printf '[General]\nEnableNetworkConfiguration=true\n' | $SUDO tee /etc/iwd/main.conf >/dev/null
+        fi
+        $SUDO systemctl enable --now iwd.service || echo "Warning: could not enable iwd."
+    fi
+    if command -v bluetoothctl >/dev/null 2>&1; then
+        $SUDO systemctl enable --now bluetooth.service || echo "Warning: could not enable bluetooth."
+    fi
+
+    # brightnessctl needs the video group (takes effect on next login).
+    if getent group video >/dev/null 2>&1 && ! id -nG | tr ' ' '\n' | grep -qx video; then
+        $SUDO usermod -aG video "$(id -un)" && echo "Added $(id -un) to group video: log out and in again."
+    fi
 }
 
 install_deps
@@ -139,7 +183,19 @@ for_each_item backup_item
 
 for_each_item install_item
 
+# If a mango session is running, apply the new configs now.
+if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+    mmsg dispatch reload_config >/dev/null 2>&1 || true
+    makoctl reload >/dev/null 2>&1 || true
+    pkill -SIGUSR2 waybar >/dev/null 2>&1 || true
+fi
+
 echo "Dotfiles installed from $SRC."
+if ! command -v mango >/dev/null 2>&1; then
+    echo "mango is not installed: the desktop will not start on login."
+else
+    echo "Log in on tty1 to start the desktop."
+fi
 if [ "$backed_up" -eq 1 ]; then
     echo "Previous files backed up to $BACKUP_DIR."
 fi
