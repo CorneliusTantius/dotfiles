@@ -21,7 +21,7 @@ sh install.sh
 The same script is the installer on a blank Arch/CachyOS tty and the updater on machines that already have it. It is safe to re-run. It:
 
 1. installs git if missing (when run through `curl`);
-2. installs missing packages: mango (`mangowm`), waybar, mako, fuzzel, foot, udiskie, grim, slurp, wl-clipboard, brightnessctl, pipewire, bluez, iwd, polkit, JetBrains Mono, plus bluetui/impala/wiremix on Arch. It uses pacman, apt or dnf, whichever exists (mango is only packaged for Arch);
+2. installs missing packages: mango (`mangowm`), waybar, mako, fuzzel, foot, udiskie, grim, slurp, wl-clipboard, wlr-randr, brightnessctl, pipewire, bluez, iwd, polkit, JetBrains Mono, plus bluetui/impala/wiremix on Arch. It uses pacman, apt or dnf, whichever exists (mango is only packaged for Arch);
 3. enables `bluetooth` and `iwd` (unless NetworkManager is enabled) and adds you to the `video` group;
 4. copies `.bashrc`, `.bash_profile` and everything in `.config/` into your home directory (copied, not symlinked);
 5. reloads mango, mako and waybar if a session is running.

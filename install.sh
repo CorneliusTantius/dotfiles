@@ -94,9 +94,9 @@ install_item() {
 # --- Dependencies -----------------------------------------------------------
 # Entries are "command=package". The pseudo-command "font" checks for
 # JetBrains Mono via fc-list.
-DEPS_ARCH="mango=mangowm pipewire=pipewire pipewire-pulse=pipewire-pulse bluetoothctl=bluez iwctl=iwd pkexec=polkit waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber bluetui=bluetui impala=impala wiremix=wiremix font=ttf-jetbrains-mono"
-DEPS_DEBIAN="waybar=waybar mako=mako-notifier udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=fonts-jetbrains-mono"
-DEPS_FEDORA="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard brightnessctl=brightnessctl wpctl=wireplumber font=jetbrains-mono-fonts"
+DEPS_ARCH="mango=mangowm pipewire=pipewire pipewire-pulse=pipewire-pulse bluetoothctl=bluez iwctl=iwd pkexec=polkit waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard wlr-randr=wlr-randr brightnessctl=brightnessctl wpctl=wireplumber bluetui=bluetui impala=impala wiremix=wiremix font=ttf-jetbrains-mono"
+DEPS_DEBIAN="waybar=waybar mako=mako-notifier udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard wlr-randr=wlr-randr brightnessctl=brightnessctl wpctl=wireplumber font=fonts-jetbrains-mono"
+DEPS_FEDORA="waybar=waybar mako=mako udiskie=udiskie fuzzel=fuzzel foot=foot grim=grim slurp=slurp wl-copy=wl-clipboard wlr-randr=wlr-randr brightnessctl=brightnessctl wpctl=wireplumber font=jetbrains-mono-fonts"
 
 have() {
     if [ "$1" = font ]; then
