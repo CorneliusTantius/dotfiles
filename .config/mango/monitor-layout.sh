@@ -190,11 +190,6 @@ for h in json.load(sys.stdin):
         dis=$(edit_conf | grep -F "name:^$target\$" | tr ',' '\n' | sed -n 's/^disable://p')
         dis=${dis:-0}
         new_dis=$((1 - dis))
-        # Disabling the only output leaves a black screen.
-        if [ "$new_dis" = 1 ] && [ -z "$ext" ]; then
-            echo "Refusing to disable the only monitor." >&2
-            exit 1
-        fi
         apply_conf "$(edit_conf "$target=disable:$new_dis")"
         if [ "$dry" -eq 0 ]; then
             if [ "$new_dis" = 1 ]; then
